@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+RandomDungeon/RandomDungeon/Debug/*
+RandomDungeon/RandomDungeon.opensdf
+
