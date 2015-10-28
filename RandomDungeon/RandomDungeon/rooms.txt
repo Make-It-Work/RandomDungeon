@@ -1,0 +1,6 @@
+Size small medium large
+Attribute table stool bed box closet
+Dirt dust blood none
+Lightsource candle torch fireplace wallcracks none
+Floor sand stone mud
+Decoration skeleton painting chains none
