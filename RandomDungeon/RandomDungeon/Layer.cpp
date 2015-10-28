@@ -48,7 +48,7 @@ Layer::Layer(int vertexCount) {
 					}
 				}
 				//Decide connection downwards
-				if (!yCounter + 1 >= vertexCount && !currentRoom->adjacentTo(_roomMatrix[xCounter][yCounter + 1])) {
+				if (yCounter + 1 < vertexCount && !currentRoom->adjacentTo(_roomMatrix[xCounter][yCounter + 1])) {
 					int RandIndex = rand() % 3; //generates a random number between 0 and 2
 					if (RandIndex != 1) {
 						createConnection(currentRoom, _roomMatrix[xCounter][yCounter + 1]);
@@ -64,7 +64,7 @@ Layer::Layer(int vertexCount) {
 					}
 				}
 				//Decide connection right
-				if (!xCounter + 1 >= vertexCount && !currentRoom->adjacentTo(_roomMatrix[xCounter + 1][yCounter])) {
+				if (xCounter + 1 < vertexCount && !currentRoom->adjacentTo(_roomMatrix[xCounter + 1][yCounter])) {
 					int RandIndex = rand() % 3; //generates a random number between 0 and 2
 					if (RandIndex != 1) {
 						createConnection(currentRoom, _roomMatrix[xCounter + 1][yCounter]);
