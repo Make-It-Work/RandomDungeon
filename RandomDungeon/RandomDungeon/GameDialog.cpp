@@ -17,7 +17,7 @@ void GameDialog::setOptions() {
 	options.clear();
 
 	options.push_back("move");
-	options.push_back("help");
+	options.push_back("inventory");
 	options.push_back("search");
 	options.push_back("use");
 	options.push_back("exit");

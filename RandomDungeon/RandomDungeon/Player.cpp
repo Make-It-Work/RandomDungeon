@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
+#include <iostream>
+#include "GameObject.h"
 
 
 Player::Player()
@@ -34,6 +36,13 @@ bool Player::executeAction(std::string action)
 		}
 		else if (direction == "right") {
 			xPosition++;
+		}
+	}
+	else if (action == "inventory") {
+		std::cout << "Your inventory contains:" << std::endl;
+		for each (GameObject* obj in backpack)
+		{
+			std::cout << obj->getName() << std::endl;
 		}
 	}
 	

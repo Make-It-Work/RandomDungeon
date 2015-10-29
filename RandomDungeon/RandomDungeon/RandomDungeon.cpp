@@ -36,18 +36,19 @@ int main()
 		currentRoom = l->getCurrentRoom(player);
 		inGame.setOptions();
 		std::string action = inGame.display(currentRoom);
-		if (action.find("move") == 0) {
-			if (l->canMove(action, player)) {
-				playing = player->executeAction(action);
+		if (action != "") {
+			if (action.find("move") == 0) {
+				if (l->canMove(action, player)) {
+					playing = player->executeAction(action);
+				}
+				else {
+					std::cout << "You cannot move this way" << std::endl;
+				}
 			}
 			else {
-				std::cout << "You cannot move this way" << std::endl;
+				playing = player->executeAction(action);
 			}
 		}
-		else {
-			playing = player->executeAction(action);
-		}
-
 	}
 
 	delete l;
