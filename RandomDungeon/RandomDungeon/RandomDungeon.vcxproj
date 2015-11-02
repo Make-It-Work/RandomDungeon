@@ -148,7 +148,11 @@
     <ClInclude Include="Attribute.h" />
     <ClInclude Include="AttributeFactory.h" />
     <ClInclude Include="Corridor.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyGenerator.h" />
     <ClInclude Include="GameDialog.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ObjectGenerator.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RoomGenerator.h" />
     <ClInclude Include="StartDialog.h" />
@@ -161,7 +165,11 @@
     <ClCompile Include="Attribute.cpp" />
     <ClCompile Include="AttributeFactory.cpp" />
     <ClCompile Include="Corridor.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyGenerator.cpp" />
     <ClCompile Include="GameDialog.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="ObjectGenerator.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RoomGenerator.cpp" />
     <ClCompile Include="StartDialog.cpp" />

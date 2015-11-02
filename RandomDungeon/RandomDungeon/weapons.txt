@@ -1,0 +1,14 @@
+Sword 5
+Dagger 2
+Knife 1
+Axe 3
+Trident 4
+_____
+Gold 4
+Silver 3
+Metal 2
+Glass 1
+_____
+Wood
+Metal
+Gold

@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include "Room.h"
+#include <ctime>
 
 StartDialog dialog;
 GameDialog inGame;
@@ -21,8 +22,8 @@ bool playing = true;
 
 int main()
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
+	
+	srand(time(NULL));
 	std::string playerName = dialog.activate();
 
 	Player* player = new Player();
@@ -32,9 +33,11 @@ int main()
 
 	Layer* l = new Layer(size);
 
+	_crtBreakAlloc = 3357;
+
 	while (playing) {
 		currentRoom = l->getCurrentRoom(player);
-		inGame.setOptions();
+		inGame.setOptions(currentRoom);
 		std::string action = inGame.display(currentRoom);
 		if (action != "") {
 			if (action.find("move") == 0) {
@@ -46,8 +49,54 @@ int main()
 				}
 			}
 			else {
+				if (action.find("search") == 0) {
+					GameObject* go = currentRoom->search();
+					if (go != nullptr) {
+						currentRoom->removeObject();
+						player->addToBackpack(go);
+					}
+				}
+				else if(action.find("fight") == 0) {
+					bool won = false;
+					while (!won) {
+						inGame.setFightOptions(currentRoom);
+						std::string action = inGame.fightDisplay(currentRoom);
+
+						if (action == "hit") {
+							if (!currentRoom->getEnemy()->hit()) {
+								won = true;
+								currentRoom->destroyEnemy();
+							}
+						}
+						else if (action == "stab") {
+							GameObject* weapon = player->getWeapon();
+							if (weapon != nullptr) {
+								if (currentRoom->getEnemy()->stabbed(weapon->getStrength())) {
+									won = true;
+									currentRoom->destroyEnemy();
+								}
+							}
+							else {
+								std::cout << "You don't have a weapon to fight with. Use the use command to equip yourself with a weapon." << std::endl;
+							}
+						}
+						if (currentRoom->hasEnemy()) {
+							player->getAttacked(currentRoom->getEnemy()->attack());
+						}
+						if (player->getHealth() <= 0) {
+							playing = false;
+							won = true;
+						}
+					}
+				}
 				playing = player->executeAction(action);
+				if (currentRoom->hasEnemy()) {
+					player->getAttacked(currentRoom->getEnemy()->attack());
+				}
 			}
+		}
+		if (player->getHealth() <= 0) {
+			playing = false;
 		}
 	}
 

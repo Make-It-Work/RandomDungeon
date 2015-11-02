@@ -1,6 +1,6 @@
-Size small medium large
-Attribute table stool bed box closet
-Dirt dust blood none
-Lightsource candle torch fireplace wallcracks none
-Floor sand stone mud
-Decoration skeleton painting chains none
+small medium large
+table stool bed box closet
+dust blood none 
+candle torch fireplace wallcracks none
+sand stone mud
+skeleton painting chain none

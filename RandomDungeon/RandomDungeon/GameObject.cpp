@@ -9,7 +9,3 @@ GameObject::GameObject()
 GameObject::~GameObject()
 {
 }
-
-std::string GameObject::getName() {
-	return _name;
-}

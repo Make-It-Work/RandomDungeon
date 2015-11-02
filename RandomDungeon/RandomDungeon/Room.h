@@ -1,12 +1,16 @@
 #pragma once
 #include <vector>
+#include <map>
 #include "AttributeFactory.h"
+#include "Enemy.h"
 class Attribute;
+class GameObject;
 
 class Room
 {
 private:
-	std::vector<Room*> adjacentRooms;
+	std::map<std::string, Room*> adjacentRooms;
+	Enemy* _enemy = nullptr;
 	int RoomNumber = 0;
 	bool wasVisited = false;
 	std::string _size = "";
@@ -16,6 +20,7 @@ private:
 	std::string _decoration = "";
 	Attribute* _attribute = nullptr;
 	AttributeFactory factory;
+	GameObject* _object = nullptr;
 public:
 	Room();
 	~Room();
@@ -23,8 +28,35 @@ public:
 	std::string getSize();
 	void setAttribute(std::string attribute);
 	Attribute* getAttribute();
-	void addAdjacentRoom(Room * room);
+	void addAdjacentRoom(Room * room, std::string direction);
+	void setDirt(std::string dirt) { _dirt = dirt; };
+	std::string getDirt() {	return _dirt; };
+	void setLightsource(std::string light) { _lightsource = light; };
+	std::string getLightsource() {
+		return _lightsource;
+	};
+	void setFloor(std::string floor) {
+		_floor = floor;
+	};
+	std::string getFloor() {
+		return _floor;
+	};
+	void setDecoration(std::string dec) {
+		_decoration = dec;
+	};
+	std::string getDecoration() {
+		return _decoration;
+	};
+	Enemy* getEnemy() { return _enemy; }
+	GameObject* getObject() { return _object; }
 	bool adjacentTo(Room * room);
+	void addEnemy(Enemy* enemy);
+	void addObject(GameObject* object);
+	void removeObject();
 	void print();
+	GameObject* search();
+	void destroyEnemy();
+	bool hasEnemy() { return _enemy != nullptr; }
+	bool hasObject() { return _object != nullptr; }
 };
 

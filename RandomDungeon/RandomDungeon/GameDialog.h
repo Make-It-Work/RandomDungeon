@@ -9,8 +9,9 @@ private:
 public:
 	GameDialog();
 	~GameDialog();
-	void setOptions();
+	void setOptions(Room* room);
+	void setFightOptions(Room* room);
+	std::string fightDisplay(Room* room);
 	std::string display(Room* room);
-	bool executeCommand(std::string command);
 };
 

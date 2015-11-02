@@ -40,30 +40,30 @@ Layer::Layer(int vertexCount) {
 				Room* currentRoom = _roomMatrix[xCounter][yCounter];
 				//Decide connection upwards
 				if (!yCounter - 1 < 0 && !currentRoom->adjacentTo(_roomMatrix[xCounter][yCounter-1])) {
-					int RandIndex = rand() % 3; //generates a random number between 0 and 2
+					int RandIndex = rand() % 4; //generates a random number between 0 and 2
 					if (RandIndex != 1) {
-						createConnection(currentRoom, _roomMatrix[xCounter][yCounter - 1]);
+						createConnection(currentRoom, _roomMatrix[xCounter][yCounter - 1], "up", "down");
 					}
 				}
 				//Decide connection downwards
 				if (yCounter + 1 < vertexCount && !currentRoom->adjacentTo(_roomMatrix[xCounter][yCounter + 1])) {
-					int RandIndex = rand() % 3; //generates a random number between 0 and 2
+					int RandIndex = rand() % 4; //generates a random number between 0 and 2
 					if (RandIndex != 1) {
-						createConnection(currentRoom, _roomMatrix[xCounter][yCounter + 1]);
+						createConnection(currentRoom, _roomMatrix[xCounter][yCounter + 1], "down", "up");
 					}
 				}
 				//Decide connection left
 				if (!xCounter - 1 < 0 && !currentRoom->adjacentTo(_roomMatrix[xCounter - 1][yCounter])) {
-					int RandIndex = rand() % 3; //generates a random number between 0 and 2
+					int RandIndex = rand() % 4; //generates a random number between 0 and 2
 					if (RandIndex != 1) {
-						createConnection(currentRoom, _roomMatrix[xCounter - 1][yCounter]);
+						createConnection(currentRoom, _roomMatrix[xCounter - 1][yCounter], "left", "right");
 					}
 				}
 				//Decide connection right
 				if (xCounter + 1 < vertexCount && !currentRoom->adjacentTo(_roomMatrix[xCounter + 1][yCounter])) {
-					int RandIndex = rand() % 3; //generates a random number between 0 and 2
+					int RandIndex = rand() % 4; //generates a random number between 0 and 2
 					if (RandIndex != 1) {
-						createConnection(currentRoom, _roomMatrix[xCounter + 1][yCounter]);
+						createConnection(currentRoom, _roomMatrix[xCounter + 1][yCounter], "right", "left");
 					}
 				}
 				xCounter++;
@@ -71,16 +71,59 @@ Layer::Layer(int vertexCount) {
 			yCounter++;
 		}
 	}
+	addEnemies(vertexCount);
+	addObjects(vertexCount);
 }
 
-void Layer::createConnection(Room* rooma, Room* roomb) {
-	rooma->addAdjacentRoom(roomb);
-	roomb->addAdjacentRoom(rooma);
+void Layer::addEnemies(int vertexCount) {
+	int area = vertexCount * vertexCount;
+	int amountOfEnemies = area / 2;
+	int counter = 0;
+	while (counter < amountOfEnemies) {
+		bool hasPlaced = false;
+		int xIndex = rand() % vertexCount;
+		int yIndex = rand() % vertexCount;
+		Enemy* enemy = enem->createEnemy();
+		while (_roomMatrix[xIndex][yIndex]->hasEnemy() && !hasPlaced) {
+			int xIndex = rand() % vertexCount;
+			int yIndex = rand() % vertexCount;
+			hasPlaced = true;
+		}
+		_roomMatrix[xIndex][yIndex]->addEnemy(enemy);
+		hasPlaced = true;
+		counter++;
+	}
+}
+
+void Layer::addObjects(int vertexCount) {
+	int area = vertexCount * vertexCount;
+	int amountOfObjects = area / 3;
+	int counter = 0;
+	while (counter < amountOfObjects) {
+		bool hasPlaced = false;
+		int xIndex = rand() % vertexCount;
+		int yIndex = rand() % vertexCount;
+		GameObject* object = obj->createObject();
+		while (_roomMatrix[xIndex][yIndex]->hasObject() && !hasPlaced) {
+			int xIndex = rand() % vertexCount;
+			int yIndex = rand() % vertexCount;
+			hasPlaced = true;
+		}
+		_roomMatrix[xIndex][yIndex]->addObject(object);
+		std::cout << "added to " << xIndex << " " << yIndex;
+		hasPlaced = true;
+		counter++;
+	}
+}
+
+void Layer::createConnection(Room* rooma, Room* roomb, std::string dirab, std::string dirba) {
+	rooma->addAdjacentRoom(roomb, dirab);
+	roomb->addAdjacentRoom(rooma, dirba);
 }
 
 void Layer::addRoom(int a, int b) {
 	if (a >= 0 && a < _vertexCount && b >= 0 && b < _vertexCount) {
-		Room* r = gen.createRoom();
+		Room* r = gen->createRoom();
 		_roomMatrix[a][b] = r;
 	}
 }
@@ -94,6 +137,10 @@ void Layer::removeRoom(int a, int b) {
 
 void Layer::init() {
 	
+}
+
+void Layer::draw()
+{
 }
 
 bool Layer::canMove(std::string action, Player* player) {
@@ -143,6 +190,9 @@ Layer::~Layer()
 		delete[] _roomMatrix[i];
 	}
 
+	delete obj;
+	delete enem;
+	delete gen;
 	delete[] _roomMatrix;
 	delete[] _adjacencyMatrix;
 }
