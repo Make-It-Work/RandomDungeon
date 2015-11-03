@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include "Talisman.h"
+#include "Grenade.h"
 
 class GameObject;
 class Potion;
@@ -49,5 +50,6 @@ public:
 	void rest();
 	bool exit(Room* curRoom, Room* end);
 	Talisman talisman;
+	Grenade grenade;
 };
 

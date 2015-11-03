@@ -16,6 +16,7 @@ public:
 	bool stabbed(int weaponStrength);
 	bool checkAlive();
 	std::string getName() { return name; }
+	int getStrength() { return strength; }
 	void setProperties(std::map<std::string, std::string>);
 	Enemy();
 	~Enemy();

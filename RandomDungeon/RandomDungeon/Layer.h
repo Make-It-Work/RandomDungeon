@@ -22,6 +22,7 @@ private:
 public:
 	Layer();
 	Layer(int vertextCount);
+	Room *** getMatrix();
 	void addEnemies(int vertexCount);
 	void addObjects(int vertexCount);
 	void addTraps(int vertexCount);
@@ -34,6 +35,9 @@ public:
 	Room* getCurrentRoom(Player* player);
 	Room* getStartRoom() {
 		return startRoom;
+	}
+	int getVertexCount() {
+		return _vertexCount;
 	}
 	void init();
 	void draw();

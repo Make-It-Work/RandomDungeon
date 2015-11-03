@@ -75,6 +75,9 @@
     <ClInclude Include="Talisman.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Grenade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -132,6 +135,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Talisman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grenade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

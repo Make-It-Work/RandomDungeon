@@ -61,6 +61,15 @@ void Room::addAdjacentRoom(Room* room, std::string direction) {
 	adjacentRooms[direction] = room;
 }
 
+void Room::destroyCorridor(std::string direction)
+{
+	Room* r = adjacentRooms[direction];
+	adjacentRooms.erase(direction);
+	blockedAdjacentRooms[direction] = r;
+}
+
+
+
 bool Room::adjacentTo(Room* room) {
 	if (!adjacentRooms.empty()) {
 		for (auto kv : adjacentRooms) {
@@ -146,4 +155,33 @@ int Room::doTrap() {
 		return rv;
 	}
 	return 0;
+}
+
+int Room::getDifficulty() {
+	int diff = 0;
+	if (_trap != nullptr) {
+		diff += _trap->getDamage();
+	}
+	if (_enemy != nullptr) {
+		diff += _enemy->getStrength();
+	}
+	return diff;
+}
+
+bool Room::hasRight() {
+	if (adjacentRooms.find("right") == adjacentRooms.end()) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+bool Room::hasDown() {
+	if (adjacentRooms.find("down") == adjacentRooms.end()) {
+		return false;
+	}
+	else {
+		return true;
+	}
 }

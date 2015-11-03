@@ -12,8 +12,9 @@ class Room
 {
 private:
 	std::map<std::string, Room*> adjacentRooms;
+	std::map<std::string, Room*> blockedAdjacentRooms;
+	int primPriority = 10000000;
 	Enemy* _enemy = nullptr;
-	int RoomNumber = 0;
 	bool wasVisited = false;
 	std::string _size = "";
 	std::string _dirt = "";
@@ -32,9 +33,28 @@ public:
 	void setAttribute(std::string attribute);
 	Attribute* getAttribute();
 	void addAdjacentRoom(Room * room, std::string direction);
-	void setDirt(std::string dirt) { _dirt = dirt; };
-	std::string getDirt() {	return _dirt; };
-	void setLightsource(std::string light) { _lightsource = light; };
+	void destroyCorridor(std::string direction);
+	bool adjacentTo(Room * room);
+	void addEnemy(Enemy* enemy);
+	void addObject(GameObject* object);
+	void removeObject();
+	void print();
+	GameObject* search();
+	void destroyEnemy();
+	void addTrap(Trap * trap);
+	bool hasTrap();
+	int doTrap();
+	int getDifficulty();
+
+	void setDirt(std::string dirt) { 
+		_dirt = dirt; 
+	};
+	std::string getDirt() {	
+		return _dirt; 
+	};
+	void setLightsource(std::string light) { 
+		_lightsource = light; 
+	};
 	std::string getLightsource() {
 		return _lightsource;
 	};
@@ -53,19 +73,21 @@ public:
 	std::map<std::string, Room*> getAdjacentRooms() {
 		return adjacentRooms;
 	}
-	Enemy* getEnemy() { return _enemy; }
-	GameObject* getObject() { return _object; }
-	bool adjacentTo(Room * room);
-	void addEnemy(Enemy* enemy);
-	void addObject(GameObject* object);
-	void removeObject();
-	void print();
-	GameObject* search();
-	void destroyEnemy();
-	void addTrap(Trap * trap);
-	bool hasTrap();
-	int doTrap();
+	Enemy* getEnemy() { 
+		return _enemy; 
+	}
+	GameObject* getObject() { 
+		return _object; 
+	}
+	int getPrimPriority() {
+		return primPriority;
+	}
+	void setPrimPriority(int prio) {
+		primPriority = prio;
+	}
 	bool hasEnemy() { return _enemy != nullptr; }
 	bool hasObject() { return _object != nullptr; }
+	bool hasRight();
+	bool hasDown();
 };
 

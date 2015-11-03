@@ -77,6 +77,10 @@ Layer::Layer(int vertexCount) {
 	startRoom = _roomMatrix[0][0];
 }
 
+Room*** Layer::getMatrix() {
+	return _roomMatrix;
+}
+
 void Layer::addEnemies(int vertexCount) {
 	int area = vertexCount * vertexCount;
 	int amountOfEnemies = area / 2;
@@ -165,6 +169,35 @@ void Layer::init() {
 
 void Layer::draw()
 {
+	std::string roomline = "";
+	std::string corLine = "";
+	int yCounter = 0;
+	int xCounter = 0;
+	while (yCounter < _vertexCount) {
+		roomline = "";
+		corLine = "";
+		xCounter = 0;
+		while (xCounter < _vertexCount) {
+			roomline = roomline + "R";
+			Room* r = _roomMatrix[xCounter][yCounter];
+			if (r->hasRight()) {
+				roomline = roomline + "-";
+			}
+			else {
+				roomline = roomline + " ";
+			}
+			if (r->hasDown()) {
+				corLine = corLine + "| ";
+			}
+			else {
+				corLine = corLine + "  ";
+			}
+			xCounter++;
+		}
+		std::cout << roomline << std::endl;
+		std::cout << corLine << std::endl;
+		yCounter++;
+	}
 }
 
 bool Layer::canMove(std::string action, Player* player) {

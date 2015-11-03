@@ -45,6 +45,8 @@ int main()
 				else {
 					std::cout << "You cannot move this way" << std::endl;
 				}
+			} else if (action == "map") {
+				l->draw();
 			}
 			else if (action == "exit") {
 				playing = player->exit(currentRoom, l->getStartRoom());
@@ -54,7 +56,10 @@ int main()
 					int distance = player->talisman.use(currentRoom, l->getStartRoom());
 					std::cout << "The talisman lights up and whispers the exit is " << distance << " rooms away." << std::endl;
 				}
-				if (action.find("search") == 0) {
+				else if (action == "grenade") {
+					player->grenade.use(l, player);
+				}
+				else if (action.find("search") == 0) {
 					GameObject* go = currentRoom->search();
 					if (go != nullptr) {
 						currentRoom->removeObject();
