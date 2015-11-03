@@ -206,6 +206,58 @@ void Layer::draw()
 	}
 }
 
+void Layer::drawDifficulty(Player* p)
+{
+	std::string roomline = "";
+	std::string corLine = "";
+	int yCounter = 0;
+	int xCounter = 0;
+	while (yCounter < _vertexCount) {
+		roomline = "";
+		corLine = "";
+		xCounter = 0;
+		while (xCounter < _vertexCount) {
+			Room* r = _roomMatrix[xCounter][yCounter];
+			if (r == getCurrentRoom(p)) {
+				roomline = roomline + "P";
+			}
+			else if (r == startRoom) {
+				roomline = roomline + "E";
+			}
+			else {
+				roomline = roomline + "R";
+			}
+			std::string s = std::to_string(r->getDifficulty());
+			while (s.length() < 4) {
+				s = "0" + s;
+			}
+			roomline = roomline + s;
+			if (r->hasRight()) {
+				roomline = roomline + "-";
+			}
+			else if (r->hasBlockedRight()) {
+				roomline = roomline + "~";
+			}
+			else {
+				roomline = roomline + " ";
+			}
+			if (r->hasDown()) {
+				corLine = corLine + "   |  ";
+			}
+			else if (r->hasBlockedDown()) {
+				corLine = corLine + "   x  ";
+			}
+			else {
+				corLine = corLine + "      ";
+			}
+			xCounter++;
+		}
+		std::cout << roomline << std::endl;
+		std::cout << corLine << std::endl;
+		yCounter++;
+	}
+}
+
 bool Layer::canMove(std::string action, Player* player) {
 	std::string direction = action.substr(5);
 	int curX = player->getXPosition();

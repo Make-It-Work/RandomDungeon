@@ -41,6 +41,7 @@ public:
 	}
 	void init();
 	void draw();
+	void drawDifficulty(Player* player);
 	bool canMove(std::string action, Player* player);
 };
 

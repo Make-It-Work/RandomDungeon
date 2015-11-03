@@ -48,6 +48,9 @@ int main()
 			} else if (action == "map") {
 				l->draw();
 			}
+			else if (action == "drawdiff") {
+				l->drawDifficulty(player);
+			}
 			else if (action == "exit") {
 				playing = player->exit(currentRoom, l->getStartRoom());
 			}
