@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="Attribute.h" />
     <ClInclude Include="AttributeFactory.h" />
+    <ClInclude Include="Compass.h" />
     <ClInclude Include="Corridor.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyGenerator.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="ObjectGenerator.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Potion.h" />
+    <ClInclude Include="RoomComparer.h" />
     <ClInclude Include="RoomGenerator.h" />
     <ClInclude Include="StartDialog.h" />
     <ClInclude Include="Layer.h" />
@@ -172,6 +174,7 @@
   <ItemGroup>
     <ClCompile Include="Attribute.cpp" />
     <ClCompile Include="AttributeFactory.cpp" />
+    <ClCompile Include="Compass.cpp" />
     <ClCompile Include="Corridor.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyGenerator.cpp" />

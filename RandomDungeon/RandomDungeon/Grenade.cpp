@@ -84,6 +84,7 @@ void Grenade::use(Layer* l, Player* p) {
 			removed++;
 			cor->getRoomA()->destroyCorridor(cor->getDirection());
 		}
+		delete cor;
 	}
 	corridors.clear();
 	minSpanningCors.clear();

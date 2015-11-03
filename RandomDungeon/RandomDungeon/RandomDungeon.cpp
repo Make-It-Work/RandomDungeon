@@ -59,6 +59,9 @@ int main()
 				else if (action == "grenade") {
 					player->grenade.use(l, player);
 				}
+				else if (action == "compass") {
+					std::cout << player->compass.use(l, player) << std::endl;
+				}
 				else if (action.find("search") == 0) {
 					GameObject* go = currentRoom->search();
 					if (go != nullptr) {

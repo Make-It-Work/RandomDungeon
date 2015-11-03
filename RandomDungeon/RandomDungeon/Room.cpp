@@ -68,7 +68,15 @@ void Room::destroyCorridor(std::string direction)
 	blockedAdjacentRooms[direction] = r;
 }
 
-
+std::string Room::getExitName(Room* r) {
+	for each (auto kv in adjacentRooms)
+	{
+		if (kv.second == r) {
+			return kv.first;
+		}
+	}
+	return "";
+}
 
 bool Room::adjacentTo(Room* room) {
 	if (!adjacentRooms.empty()) {
@@ -179,6 +187,24 @@ bool Room::hasRight() {
 
 bool Room::hasDown() {
 	if (adjacentRooms.find("down") == adjacentRooms.end()) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+bool Room::hasBlockedRight() {
+	if (blockedAdjacentRooms.find("right") == blockedAdjacentRooms.end()) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+bool Room::hasBlockedDown() {
+	if (blockedAdjacentRooms.find("down") == blockedAdjacentRooms.end()) {
 		return false;
 	}
 	else {

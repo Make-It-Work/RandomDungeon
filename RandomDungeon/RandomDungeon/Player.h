@@ -4,10 +4,10 @@
 #include <vector>
 #include "Talisman.h"
 #include "Grenade.h"
+#include "Compass.h"
 
 class GameObject;
 class Potion;
-
 class Player
 {
 private:
@@ -51,5 +51,6 @@ public:
 	bool exit(Room* curRoom, Room* end);
 	Talisman talisman;
 	Grenade grenade;
+	Compass compass;
 };
 

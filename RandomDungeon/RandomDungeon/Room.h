@@ -14,6 +14,7 @@ private:
 	std::map<std::string, Room*> adjacentRooms;
 	std::map<std::string, Room*> blockedAdjacentRooms;
 	int primPriority = 10000000;
+	
 	Enemy* _enemy = nullptr;
 	bool wasVisited = false;
 	std::string _size = "";
@@ -45,7 +46,8 @@ public:
 	bool hasTrap();
 	int doTrap();
 	int getDifficulty();
-
+	int minEffort = INT_MAX;
+	std::string getExitName(Room* r);
 	void setDirt(std::string dirt) { 
 		_dirt = dirt; 
 	};
@@ -89,5 +91,7 @@ public:
 	bool hasObject() { return _object != nullptr; }
 	bool hasRight();
 	bool hasDown();
+	bool hasBlockedRight();
+	bool hasBlockedDown();
 };
 

@@ -183,11 +183,17 @@ void Layer::draw()
 			if (r->hasRight()) {
 				roomline = roomline + "-";
 			}
+			else if (r->hasBlockedRight()) {
+				roomline = roomline + "~";
+			}
 			else {
 				roomline = roomline + " ";
 			}
 			if (r->hasDown()) {
 				corLine = corLine + "| ";
+			}
+			else if (r->hasBlockedDown()) {
+				corLine = corLine + "x ";
 			}
 			else {
 				corLine = corLine + "  ";
