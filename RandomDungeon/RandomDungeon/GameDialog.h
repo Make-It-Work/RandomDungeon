@@ -9,7 +9,7 @@ private:
 public:
 	GameDialog();
 	~GameDialog();
-	void setOptions(Room* room);
+	void setOptions(Room* room, bool isExit);
 	void setFightOptions(Room* room);
 	std::string fightDisplay(Room* room);
 	std::string display(Room* room);

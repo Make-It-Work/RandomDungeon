@@ -19,7 +19,6 @@ ObjectGenerator::ObjectGenerator()
 	// (je kunt ook een 3e param meegeven als je een ander 'regeleinde' wil gebruiken)
 	int phase = 0;
 	while (getline(input_file, line)) { // getline() geeft false zodra end-of-file is bereikt
-		std::cout << line;
 		if (line == "_____") {
 			phase++;
 		}
@@ -62,6 +61,9 @@ ObjectGenerator::ObjectGenerator()
 
 ObjectGenerator::~ObjectGenerator()
 {
+	objectTypes.clear();
+	materials.clear();
+	_handles.clear();
 }
 
 GameObject * ObjectGenerator::createObject()

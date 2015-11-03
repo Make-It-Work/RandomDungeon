@@ -1,6 +1,5 @@
 // RandomDungeon.cpp : Defines the entry point for the console application.
 //
-
 #include "stdafx.h"
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
@@ -22,7 +21,8 @@ bool playing = true;
 
 int main()
 {
-	
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	srand(time(NULL));
 	std::string playerName = dialog.activate();
 
@@ -33,11 +33,9 @@ int main()
 
 	Layer* l = new Layer(size);
 
-	_crtBreakAlloc = 3357;
-
 	while (playing) {
 		currentRoom = l->getCurrentRoom(player);
-		inGame.setOptions(currentRoom);
+		inGame.setOptions(currentRoom, player->talisman.use(currentRoom, l->getStartRoom())==0);
 		std::string action = inGame.display(currentRoom);
 		if (action != "") {
 			if (action.find("move") == 0) {
@@ -48,7 +46,14 @@ int main()
 					std::cout << "You cannot move this way" << std::endl;
 				}
 			}
+			else if (action == "exit") {
+				playing = player->exit(currentRoom, l->getStartRoom());
+			}
 			else {
+				if (action == "talisman") {
+					int distance = player->talisman.use(currentRoom, l->getStartRoom());
+					std::cout << "The talisman lights up and whispers the exit is " << distance << " rooms away." << std::endl;
+				}
 				if (action.find("search") == 0) {
 					GameObject* go = currentRoom->search();
 					if (go != nullptr) {
@@ -71,7 +76,7 @@ int main()
 						else if (action == "stab") {
 							GameObject* weapon = player->getWeapon();
 							if (weapon != nullptr) {
-								if (currentRoom->getEnemy()->stabbed(weapon->getStrength())) {
+								if (currentRoom->getEnemy()->stabbed(weapon->getStrength() + player->getStrength())) {
 									won = true;
 									currentRoom->destroyEnemy();
 								}
@@ -83,6 +88,7 @@ int main()
 						if (currentRoom->hasEnemy()) {
 							player->getAttacked(currentRoom->getEnemy()->attack());
 						}
+						currentRoom->doTrap();
 						if (player->getHealth() <= 0) {
 							playing = false;
 							won = true;
@@ -90,8 +96,11 @@ int main()
 					}
 				}
 				playing = player->executeAction(action);
-				if (currentRoom->hasEnemy()) {
-					player->getAttacked(currentRoom->getEnemy()->attack());
+				if (playing) {
+					if (currentRoom->hasEnemy()) {
+						player->getAttacked(currentRoom->getEnemy()->attack());
+					}
+					currentRoom->doTrap();
 				}
 			}
 		}

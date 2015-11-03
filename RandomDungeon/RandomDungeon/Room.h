@@ -3,6 +3,8 @@
 #include <map>
 #include "AttributeFactory.h"
 #include "Enemy.h"
+
+class Trap;
 class Attribute;
 class GameObject;
 
@@ -21,6 +23,7 @@ private:
 	Attribute* _attribute = nullptr;
 	AttributeFactory factory;
 	GameObject* _object = nullptr;
+	Trap* _trap = nullptr;
 public:
 	Room();
 	~Room();
@@ -47,6 +50,9 @@ public:
 	std::string getDecoration() {
 		return _decoration;
 	};
+	std::map<std::string, Room*> getAdjacentRooms() {
+		return adjacentRooms;
+	}
 	Enemy* getEnemy() { return _enemy; }
 	GameObject* getObject() { return _object; }
 	bool adjacentTo(Room * room);
@@ -56,6 +62,9 @@ public:
 	void print();
 	GameObject* search();
 	void destroyEnemy();
+	void addTrap(Trap * trap);
+	bool hasTrap();
+	int doTrap();
 	bool hasEnemy() { return _enemy != nullptr; }
 	bool hasObject() { return _object != nullptr; }
 };

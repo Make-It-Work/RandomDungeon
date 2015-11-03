@@ -28,13 +28,15 @@ EnemyGenerator::EnemyGenerator()
 			counter++;
 		}
 		enemies.push_back(properties);
-
 	}
 }
 
 
 EnemyGenerator::~EnemyGenerator()
 {
+	_keys.clear();
+	properties.clear();
+	enemies.clear();
 }
 
 Enemy* EnemyGenerator::createEnemy() {

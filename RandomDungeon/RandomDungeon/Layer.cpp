@@ -73,6 +73,8 @@ Layer::Layer(int vertexCount) {
 	}
 	addEnemies(vertexCount);
 	addObjects(vertexCount);
+	addTraps(vertexCount);
+	startRoom = _roomMatrix[0][0];
 }
 
 void Layer::addEnemies(int vertexCount) {
@@ -90,6 +92,7 @@ void Layer::addEnemies(int vertexCount) {
 			hasPlaced = true;
 		}
 		_roomMatrix[xIndex][yIndex]->addEnemy(enemy);
+		enemy = nullptr;
 		hasPlaced = true;
 		counter++;
 	}
@@ -110,7 +113,28 @@ void Layer::addObjects(int vertexCount) {
 			hasPlaced = true;
 		}
 		_roomMatrix[xIndex][yIndex]->addObject(object);
-		std::cout << "added to " << xIndex << " " << yIndex;
+		object = nullptr;
+		hasPlaced = true;
+		counter++;
+	}
+}
+
+void Layer::addTraps(int vertexCount) {
+	int area = vertexCount * vertexCount;
+	int amountOfTraps = area / 5;
+	int counter = 0;
+	while (counter < amountOfTraps) {
+		bool hasPlaced = false;
+		int xIndex = rand() % vertexCount;
+		int yIndex = rand() % vertexCount;
+		Trap* t = trap->createTrap();
+		while (_roomMatrix[xIndex][yIndex]->hasTrap() && !hasPlaced) {
+			int xIndex = rand() % vertexCount;
+			int yIndex = rand() % vertexCount;
+			hasPlaced = true;
+		}
+		_roomMatrix[xIndex][yIndex]->addTrap(t);
+		t = nullptr;
 		hasPlaced = true;
 		counter++;
 	}
@@ -189,10 +213,12 @@ Layer::~Layer()
 		}
 		delete[] _roomMatrix[i];
 	}
-
+	
+	delete trap;
 	delete obj;
 	delete enem;
 	delete gen;
 	delete[] _roomMatrix;
+	startRoom = nullptr;
 	delete[] _adjacencyMatrix;
 }

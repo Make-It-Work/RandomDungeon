@@ -14,7 +14,7 @@ Enemy::~Enemy()
 }
 
 int Enemy::attack() {
-	std::cout << "ATTACK " << strength << std::endl;
+	std::cout << "Your enemy attacked, you lost " << strength << " of your health points"<< std::endl;
 	return strength;
 }
 bool Enemy::hit() {
@@ -36,19 +36,14 @@ bool Enemy::hit() {
 }
 
 bool Enemy::stabbed(int weaponStrength) {
-	if (level <= 8) {
-		health -= weaponStrength;
-		if (checkAlive()) {
-			std::cout << "You have done a little damage to your enemy, but he's still alive" << std::endl;
-			return false;
-		}
-		else {
-			std::cout << "You killed the " << name << "." << std::endl;
-			return true;
-		}
+	health -= weaponStrength;
+	if (checkAlive()) {
+		std::cout << "You have done a little damage to your enemy, but he's still alive" << std::endl;
+		return false;
 	}
 	else {
-		std::cout << "Your scratching has no effect on the enemy, except getting more ugly by the minute." << std::endl;
+		std::cout << "You killed the " << name << "." << std::endl;
+		return true;
 	}
 }
 

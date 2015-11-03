@@ -5,6 +5,7 @@
 #include "RoomGenerator.h"
 #include "EnemyGenerator.h"
 #include "ObjectGenerator.h"
+#include "TrapGenerator.h"
 class Player;
 
 class Layer
@@ -13,14 +14,17 @@ private:
 	bool** _adjacencyMatrix;
 	int _vertexCount;
 	Room*** _roomMatrix = nullptr;
+	Room* startRoom = nullptr;
 	RoomGenerator* gen = new RoomGenerator();
 	EnemyGenerator* enem = new EnemyGenerator();
 	ObjectGenerator* obj = new ObjectGenerator();
+	TrapGenerator* trap = new TrapGenerator();
 public:
 	Layer();
 	Layer(int vertextCount);
 	void addEnemies(int vertexCount);
 	void addObjects(int vertexCount);
+	void addTraps(int vertexCount);
 	~Layer();
 
 	void createConnection(Room * rooma, Room * roomb, std::string dirab, std::string dirba);
@@ -28,7 +32,9 @@ public:
 	void removeRoom(int a, int b);
 
 	Room* getCurrentRoom(Player* player);
-
+	Room* getStartRoom() {
+		return startRoom;
+	}
 	void init();
 	void draw();
 	bool canMove(std::string action, Player* player);

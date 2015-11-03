@@ -16,9 +16,10 @@ void GameDialog::setFightOptions(Room* room) {
 	options.clear();
 	options.push_back("hit");
 	options.push_back("stab");
+	options.push_back("quit");
 }
 
-void GameDialog::setOptions(Room* room) {
+void GameDialog::setOptions(Room* room, bool isExit) {
 	//Als de kamer vijanden heeft andere dialoog
 	options.clear();
 
@@ -30,7 +31,13 @@ void GameDialog::setOptions(Room* room) {
 	options.push_back("inventory");
 	options.push_back("search");
 	options.push_back("use");
-	options.push_back("exit");
+	options.push_back("info");
+	options.push_back("rest");
+	options.push_back("drink");
+	options.push_back("talisman");
+	if (isExit) {
+		options.push_back("exit");
+	}
 }
 
 std::string GameDialog::fightDisplay(Room* room) {

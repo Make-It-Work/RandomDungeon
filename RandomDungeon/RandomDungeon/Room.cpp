@@ -6,6 +6,9 @@
 #include "GameObject.h"
 #include <algorithm>
 #include "Enemy.h"
+#include "Trap.h"
+#include "Attribute.h"
+#include "GameObject.h"
 
 using namespace std;
 
@@ -15,9 +18,22 @@ Room::Room()
 
 Room::~Room()
 {
-	delete _enemy;
-	delete _attribute;
-	delete _object;
+	if (_enemy != nullptr) {
+		delete _enemy;
+		_enemy = nullptr;
+	}
+	if (_attribute != nullptr) {
+		delete _attribute;
+		_attribute = nullptr;
+	}
+	if (_object != nullptr) {
+		delete _object;
+		_object = nullptr;
+	}
+	if (_trap != nullptr) {
+		delete _trap;
+		_trap = nullptr;
+	}
 	adjacentRooms.clear();
 }
 
@@ -108,4 +124,26 @@ GameObject* Room::search() {
 
 void Room::destroyEnemy() {
 	_enemy = nullptr;
+}
+
+void Room::addTrap(Trap* trap) {
+	_trap = trap;
+}
+
+bool Room::hasTrap() {
+	if (_trap != nullptr) {
+		return true;
+	}
+	return false;
+}
+
+int Room::doTrap() {
+	if (_trap != nullptr) {
+		std::cout << "You've " << _trap->getAction() << " " << _trap->getDescription() << " a " << _trap->getName();
+		int rv = _trap->getDamage();
+		delete _trap;
+		_trap = nullptr;
+		return rv;
+	}
+	return 0;
 }
