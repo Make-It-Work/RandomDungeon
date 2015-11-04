@@ -170,7 +170,6 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Trap.h" />
     <ClInclude Include="TrapGenerator.h" />
-    <ClInclude Include="WildAnimal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Attribute.cpp" />
@@ -199,7 +198,6 @@
     <ClCompile Include="Talisman.cpp" />
     <ClCompile Include="Trap.cpp" />
     <ClCompile Include="TrapGenerator.cpp" />
-    <ClCompile Include="WildAnimal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -136,6 +136,11 @@ GameObject* Room::search() {
 	if (_object != nullptr) {
 		std::cout << "There is a " << _object->getName() << " here. This will be added to your inventory.";
 	}
+	if (_trap != nullptr) {
+		std::cout << "You have discovered and disabled a trap." << std::endl;
+		delete _trap;
+		_trap = nullptr;
+	}
 	return _object;
 }
 

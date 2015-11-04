@@ -16,7 +16,7 @@ void GameDialog::setFightOptions(Room* room) {
 	options.clear();
 	options.push_back("hit");
 	options.push_back("stab");
-	options.push_back("quit");
+	options.push_back("move");
 }
 
 void GameDialog::setOptions(Room* room, bool isExit) {
@@ -34,7 +34,8 @@ void GameDialog::setOptions(Room* room, bool isExit) {
 	options.push_back("info");
 	options.push_back("rest");
 	options.push_back("drink");
-	options.push_back("talisman");
+	options.push_back("map");
+
 	if (isExit) {
 		options.push_back("exit");
 	}

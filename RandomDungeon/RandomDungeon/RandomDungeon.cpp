@@ -12,7 +12,6 @@
 #include <string>
 #include "Room.h"
 #include <ctime>
-#include "WildAnimal.h"
 
 StartDialog dialog;
 GameDialog inGame;
@@ -114,7 +113,16 @@ int main()
 								std::cout << "You don't have a weapon to fight with. Use the use command to equip yourself with a weapon." << std::endl;
 							}
 						}
-						if (currentRoom->hasEnemy()) {
+						else if (action.find("move") == 0) {
+							won = true;
+							if (l->canMove(action, player)) {
+								playing = player->executeAction(action);
+							}
+							else {
+								std::cout << "You cannot move this way" << std::endl;
+							}
+						}
+						if (!won && currentRoom->hasEnemy()) {
 							player->getAttacked(currentRoom->getEnemy()->attack());
 						}
 						currentRoom->doTrap();
