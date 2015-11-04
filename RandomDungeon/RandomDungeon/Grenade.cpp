@@ -75,21 +75,25 @@ void Grenade::use(Layer* l, Player* p) {
 		}
 	}
 
-	int removed = 0;
-
-
-	for each (Corridor* cor in corridors)
-	{
-		if (removed < 10 && std::find(minSpanningCors.begin(), minSpanningCors.end(), cor) == minSpanningCors.end()) {
-			removed++;
-			cor->getRoomA()->destroyCorridor(cor->getDirection());
-		}
-		delete cor;
+	if (corridors.size() == minSpanningCors.size()) {
+		std::cout << "Cannot use the grenade without locking yourself in" << std::endl;
 	}
-	corridors.clear();
-	minSpanningCors.clear();
+	else {
+		int removed = 0;
 
-	std::cout << "used grenade" << std::endl;
 
+		for each (Corridor* cor in corridors)
+		{
+			if (removed < 10 && std::find(minSpanningCors.begin(), minSpanningCors.end(), cor) == minSpanningCors.end()) {
+				removed++;
+				cor->getRoomA()->destroyCorridor(cor->getDirection());
+			}
+			delete cor;
+		}
+		corridors.clear();
+		minSpanningCors.clear();
+
+		std::cout << "used grenade" << std::endl;
+	}
 
 }

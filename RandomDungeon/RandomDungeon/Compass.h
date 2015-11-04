@@ -8,13 +8,13 @@ class Corridor;
 
 class Compass
 {
-	private:
-		bool containsRoom(std::vector<Room*> list, Room * r);
-		void resetEfforts(Layer* l, Player* p);
+private:
+	bool containsRoom(std::vector<Room*> list, Room * r);
+	void resetEfforts(Layer* l, Player* p);
 public:
 	Compass();
 	~Compass();
 	std::string use(Layer* l, Player* p);
-	
+	std::vector<Room*> Compass::returnPath(Layer* l, Player* p);
 };
 

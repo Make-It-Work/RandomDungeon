@@ -12,6 +12,7 @@
 #include <string>
 #include "Room.h"
 #include <ctime>
+#include "WildAnimal.h"
 
 StartDialog dialog;
 GameDialog inGame;
@@ -45,22 +46,39 @@ int main()
 				else {
 					std::cout << "You cannot move this way" << std::endl;
 				}
-			} else if (action == "map") {
-				l->draw();
-			}
-			else if (action == "drawdiff") {
-				l->drawDifficulty(player);
 			}
 			else if (action == "exit") {
-				playing = player->exit(currentRoom, l->getStartRoom());
+				if (currentRoom == l->getStartRoom()) {
+					playing =  false;
+				}
+			}
+			else if (action == "add enemies") {
+				std::vector<Room*> mst = player->compass.returnPath(l, player);
+				int randIndex = rand() % mst.size();
+				Enemy* wa = new Enemy();
+				std::map<std::string, std::string> props;
+				props["level"] = "40";
+				props["health"] = "50";
+				props["sensitivity"] = "1"; //How many health will be lost when hit.
+				props["strength"] = "30"; //How many health the player will lose when hit.
+				props["name"] = "Wild Animal";
+				wa->setProperties(props);
+				mst[randIndex]->addEnemy(wa);
 			}
 			else {
 				if (action == "talisman") {
 					int distance = player->talisman.use(currentRoom, l->getStartRoom());
 					std::cout << "The talisman lights up and whispers the exit is " << distance << " rooms away." << std::endl;
 				}
+				else if (action == "map") {
+					l->draw();
+				}
+				else if (action == "drawdiff") {
+					l->drawDifficulty(player);
+				}
 				else if (action == "grenade") {
 					player->grenade.use(l, player);
+					l->getCurrentRoom(player)->destroyEnemy();
 				}
 				else if (action == "compass") {
 					std::cout << player->compass.use(l, player) << std::endl;

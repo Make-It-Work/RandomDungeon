@@ -3,7 +3,7 @@
 #include <map>
 class Enemy
 {
-private:
+protected:
 	int level = 0;
 	int health = 0;
 	int sensitivity = 0; //How many health will be lost when hit.
@@ -17,6 +17,7 @@ public:
 	bool checkAlive();
 	std::string getName() { return name; }
 	int getStrength() { return strength; }
+	int getHealth() { return health; }
 	void setProperties(std::map<std::string, std::string>);
 	Enemy();
 	~Enemy();
