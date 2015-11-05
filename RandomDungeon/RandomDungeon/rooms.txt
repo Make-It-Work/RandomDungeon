@@ -1,0 +1,6 @@
+small medium large
+table stool bed box closet
+dust blood none 
+candle torch fireplace wallcracks none
+sand stone mud
+skeleton painting chain none

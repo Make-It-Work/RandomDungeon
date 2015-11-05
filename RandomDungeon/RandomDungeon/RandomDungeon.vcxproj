@@ -71,6 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Visual Leak Detector\lib\Win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -92,6 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>vld.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -145,17 +148,56 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Attribute.h" />
+    <ClInclude Include="AttributeFactory.h" />
+    <ClInclude Include="Compass.h" />
+    <ClInclude Include="Corridor.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyGenerator.h" />
+    <ClInclude Include="GameDialog.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Grenade.h" />
+    <ClInclude Include="ObjectGenerator.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Potion.h" />
+    <ClInclude Include="RoomComparer.h" />
+    <ClInclude Include="RoomGenerator.h" />
+    <ClInclude Include="StartDialog.h" />
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Talisman.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Trap.h" />
+    <ClInclude Include="TrapGenerator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Attribute.cpp" />
+    <ClCompile Include="AttributeFactory.cpp" />
+    <ClCompile Include="Compass.cpp" />
+    <ClCompile Include="Corridor.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyGenerator.cpp" />
+    <ClCompile Include="GameDialog.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Grenade.cpp" />
+    <ClCompile Include="ObjectGenerator.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Potion.cpp" />
+    <ClCompile Include="RoomGenerator.cpp" />
+    <ClCompile Include="StartDialog.cpp" />
+    <ClCompile Include="Layer.cpp" />
     <ClCompile Include="RandomDungeon.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Talisman.cpp" />
+    <ClCompile Include="Trap.cpp" />
+    <ClCompile Include="TrapGenerator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
